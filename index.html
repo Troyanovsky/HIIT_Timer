@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HIIT Timer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="hero">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title has-text-centered">HITT Timer</h1>
+                    <div class="columns">
+                        <div class="column is-one-third"></div>
+                        <div class="column is-one-third has-text-centered">
+                            <div class="content">
+                                <ul>
+                                    <li>跳跃击掌</li>
+                                    <li>高抬腿</li> 
+                                    <li>深蹲跳</li>
+                                    <li>箭步蹲</li>
+                                    <li>后撤箭步蹲+高抬腿</li>
+                                    <li>登山</li>
+                                    <li>俯卧撑</li>
+                                    <li>空中自行车</li>
+                                    <li>站姿手肘触膝</li>
+                                </ul>
+                            </div>
+                            <audio id="audioPlayer">
+                                <source src="1.mp3" type="audio/mpeg" v-bind:ended="playInterval()">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <audio id="interval">
+                                <source src="1min.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <button class="button" onclick="playAudio()" type="button">Start Workout</button>
+                        </div>
+                        <div class="column is-one-third"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        var playList = ["1.mp3", "2.mp3", "3.mp3", "4.mp3", "5.mp3", "6.mp3", "7.mp3", "8.mp3", "9.mp3"];
+        var player = document.getElementById("audioPlayer");
+        var intervalPlayer = document.getElementById("interval");
+        var currentWorkout = 0;
+
+        function playAudio() {
+            player.play();
+        }
+
+        player.onended = function () {
+            intervalPlayer.play();
+        }
+
+        intervalPlayer.onended = function () {
+            if (currentWorkout < playList.length) {
+                currentWorkout += 1;
+                player.src = playList[currentWorkout];
+                player.play();
+            } else {
+                alert ("Workout Ended.")
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
